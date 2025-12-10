@@ -1,11 +1,11 @@
-package com.moyoy
+package com.moyoy.api
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class MoyoyApplication
+class MoyoyApiApplication
 
 fun main(args: Array<String>) {
-	runApplication<MoyoyApplication>(*args)
+    runApplication<MoyoyApiApplication>(*args)
 }
