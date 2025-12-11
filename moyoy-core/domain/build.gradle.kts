@@ -1,7 +1,6 @@
 tasks.getByName("jar") {
     enabled = true
 }
-
-dependencies{
+dependencies {
     implementation(project(":moyoy-common"))
 }
