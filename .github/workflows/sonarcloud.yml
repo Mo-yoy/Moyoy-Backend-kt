@@ -1,4 +1,5 @@
 name: develop 브랜치에 PR 시 소나 클라우드 적용
+
 on:
   pull_request:
     branches:
