@@ -1,5 +1,4 @@
 name: develop 브랜치에 PR 시 소나 클라우드 적용
-
 on:
   pull_request:
     branches:
@@ -8,6 +7,9 @@ on:
 jobs:
   sonar:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
 
     steps:
       - uses: actions/checkout@v4
@@ -38,4 +40,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-        run: ./gradlew test sonar --info --stacktrace -Dsonar.qualitygate.wait=false
+        run: ./gradlew clean test jacocoTestReport sonar --info -Dsonar.qualitygate.wait=false
