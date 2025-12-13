@@ -2,10 +2,10 @@ import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 import org.jlleitschuh.gradle.ktlint.tasks.GenerateReportsTask
 
 plugins {
-    kotlin("jvm") version "2.2.21"
-    kotlin("plugin.spring") version "2.2.21"
+    kotlin("jvm") version "1.9.25"
+    kotlin("plugin.spring") version "1.9.25"
     id("io.spring.dependency-management") version "1.1.7"
-    id("org.springframework.boot") version "4.0.0" apply false
+    id("org.springframework.boot") version "3.5.8" apply false
     id("org.jlleitschuh.gradle.ktlint").version("14.0.1")
 }
 
@@ -45,7 +45,7 @@ subprojects {
 
     dependencies {
         implementation("org.jetbrains.kotlin:kotlin-reflect")
-        implementation("tools.jackson.module:jackson-module-kotlin")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("org.springframework.boot:spring-boot-starter-web")
 
         testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -55,7 +55,7 @@ subprojects {
 
     java {
         toolchain {
-            languageVersion = JavaLanguageVersion.of(24)
+            languageVersion = JavaLanguageVersion.of(21)
         }
     }
 
