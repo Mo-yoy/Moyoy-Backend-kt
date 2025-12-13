@@ -6,6 +6,10 @@ tasks.getByName("bootJar") {
     enabled = true
 }
 
+tasks.named("bootJar") {
+    dependsOn("copyOasToSwagger")
+}
+
 plugins {
     id("com.epages.restdocs-api-spec") version "0.19.2"
 }
@@ -15,6 +19,7 @@ dependencies {
     implementation(project(":moyoy-core:domain"))
     implementation(project(":moyoy-core:infra"))
 
+    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testImplementation("com.epages:restdocs-api-spec-mockmvc:0.19.2")
 }
 

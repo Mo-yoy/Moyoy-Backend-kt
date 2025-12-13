@@ -9,6 +9,32 @@ servers:
 - url: http://localhost:8080
   description: local
 tags: []
-paths: {}
+paths:
+  /api/v1/samples/{sampleId}:
+    get:
+      tags:
+      - Sample
+      summary: Get a sample by id
+      description: Get a sample by id
+      operationId: sample
+      parameters:
+      - name: sampleId
+        in: path
+        description: ""
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-v1-samples-sampleId486549215'
+              examples:
+                sample:
+                  value: "{\"sampleId\":\"aaa\",\"name\":\"sample-aaa\"}"
 components:
-  schemas: {}
+  schemas:
+    api-v1-samples-sampleId486549215:
+      type: object
