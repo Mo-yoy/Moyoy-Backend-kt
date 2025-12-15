@@ -50,7 +50,7 @@ configure<OpenApi3Extension> {
 
 tasks.register<Copy>("copyOasToSwagger") {
     delete("src/main/resources/static/swagger-ui/openapi3.yaml")
-    from("$buildDir/api-spec/openapi3.yaml")
+    from(layout.buildDirectory.file("api-spec/openapi3.yaml"))
     into("src/main/resources/static/swagger-ui")
     dependsOn("openapi3")
 }
