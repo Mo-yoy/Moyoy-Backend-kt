@@ -3,10 +3,11 @@ import org.jlleitschuh.gradle.ktlint.tasks.GenerateReportsTask
 
 plugins {
     kotlin("jvm") version "1.9.25"
-    kotlin("plugin.spring") version "1.9.25"
+    kotlin("plugin.spring") version "1.9.25" apply false
+    kotlin("plugin.jpa") version "1.9.25" apply false
     id("io.spring.dependency-management") version "1.1.7"
     id("org.springframework.boot") version "3.5.8" apply false
-    id("org.jlleitschuh.gradle.ktlint").version("14.0.1")
+    id("org.jlleitschuh.gradle.ktlint") version "14.0.1"
     id("org.sonarqube") version "7.2.0.6526"
 }
 
