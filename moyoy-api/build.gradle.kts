@@ -19,6 +19,10 @@ dependencies {
     implementation(project(":moyoy-core:domain"))
     implementation(project(":moyoy-core:infra"))
 
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+
+    testImplementation("org.springframework.security:spring-security-test")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testImplementation("com.epages:restdocs-api-spec-mockmvc:0.19.2")
 }
