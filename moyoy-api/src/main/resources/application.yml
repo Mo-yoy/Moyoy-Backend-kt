@@ -13,3 +13,5 @@ spring:
             redirect-uri: ${REDIRECT_URI}
             scope: ${SCOPE}
 
+  cors:
+    allow-origin: ${ALLOW_ORIGIN:http://localhost:5173}
