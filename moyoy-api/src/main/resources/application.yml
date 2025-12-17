@@ -2,3 +2,14 @@ spring:
   config:
     import:
       - infra.yml
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${CLIENT_ID}
+            client-secret: ${CLIENT_SECRET}
+            redirect-uri: ${REDIRECT_URI}
+            scope: ${SCOPE}
+
