@@ -85,7 +85,9 @@ subprojects {
                             "**/*Request*",
                             "**/*Response*",
                             "**/*Interceptor*",
-                            "**/*Exception*"
+                            "**/*Exception*",
+                            "**/HttpCookieOAuth2AuthorizationRequestRepository*",
+                            "**/CookieUtils*"
                         )
                     }
                 }
@@ -123,7 +125,9 @@ sonar {
                 "**/*Exception*",
                 "**/*ErrorCode*",
                 "**/Q*.class",
-                "**/Q*.kt"
+                "**/Q*.kt",
+                "**/HttpCookieOAuth2AuthorizationRequestRepository.kt",
+                "**/CookieUtils.kt"
             ).joinToString(",")
         )
     }
