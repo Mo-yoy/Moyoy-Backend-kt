@@ -1,5 +1,6 @@
 package com.moyoy.api.support.response
 
+import com.moyoy.common.error.ErrorReason
 import org.springframework.http.HttpStatus.ACCEPTED
 import org.springframework.http.HttpStatus.NO_CONTENT
 import org.springframework.http.HttpStatus.OK
@@ -21,6 +22,15 @@ class ApiResponse<T> private constructor(
 
         fun noContent(): ApiResponse<Nothing?> {
             return ApiResponse(NO_CONTENT.value(), NO_CONTENT.reasonPhrase, null, null)
+        }
+
+        fun fail(errorReason: ErrorReason): ApiResponse<Nothing?> {
+            return ApiResponse(
+                status = errorReason.status,
+                code = errorReason.code,
+                message = errorReason.errorMessage,
+                data = null
+            )
         }
     }
 }
