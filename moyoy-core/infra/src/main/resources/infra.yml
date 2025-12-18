@@ -19,6 +19,12 @@ spring:
    hibernate:
      ddl-auto: create
 
+jasypt:
+  encryptor:
+    password: ${JASYPT_PASSWORD}
+    algorithm: ${JASYPT_ALGORITHM:PBEWithMD5AndDES}
+    pool-size: 1
+
 ---
 
 spring:
@@ -34,3 +40,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+
+jasypt:
+  encryptor:
+    password: ${JASYPT_PASSWORD}
+    algorithm: ${JASYPT_ALGORITHM:PBEWithMD5AndDES}
+    pool-size: 1

@@ -5,5 +5,10 @@ import com.moyoy.infra.MoyoyConfigGroup
 import org.springframework.context.annotation.Configuration
 
 @Configuration(proxyBeanMethods = false)
-@EnableMoyoyConfig([MoyoyConfigGroup.JPA])
+@EnableMoyoyConfig(
+    [
+        MoyoyConfigGroup.JPA,
+        MoyoyConfigGroup.JASYPT
+    ]
+)
 class InfraConfig
