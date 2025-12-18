@@ -3,4 +3,5 @@ tasks.getByName("jar") {
 }
 dependencies {
     implementation(project(":moyoy-common"))
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 }

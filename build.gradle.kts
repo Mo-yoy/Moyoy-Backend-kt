@@ -87,7 +87,11 @@ subprojects {
                             "**/*Interceptor*",
                             "**/*Exception*",
                             "**/HttpCookieOAuth2AuthorizationRequestRepository*",
-                            "**/CookieUtils*"
+                            "**/CookieUtils*",
+                            "**/BaseEntity*",
+                            "**/GitHubAttributes*",
+                            "**/*Usecase\$Input*",
+                            "**/*Usecase\$Output*"
                         )
                     }
                 }
@@ -127,7 +131,11 @@ sonar {
                 "**/Q*.class",
                 "**/Q*.kt",
                 "**/HttpCookieOAuth2AuthorizationRequestRepository.kt",
-                "**/CookieUtils.kt"
+                "**/CookieUtils.kt",
+                "**/BaseEntity.kt",
+                "**/GitHubAttributes.kt",
+                "**/*Usecase\$Input*",
+                "**/*Usecase\$Output*"
             ).joinToString(",")
         )
     }
