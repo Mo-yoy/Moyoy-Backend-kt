@@ -43,12 +43,6 @@ class User(
         }
     }
 
-    // / TODO type User 인 사람들 검증 정책 추가
-//    /// 이거 비즈니스 아님?
-//    if (input.type != "User") {
-// //            throw UserGithubAccountTypeNotAllowException()
-//    }
-
     fun changeProfile(
         username: String,
         profileImgUrl: String

@@ -6,6 +6,7 @@ import com.moyoy.domain.user.SocialSize
 import com.moyoy.domain.user.User
 import com.moyoy.domain.user.UserRepository
 import com.moyoy.domain.user.dto.UserCreateDto
+import com.moyoy.domain.user.error.UserGithubAccountTypeNotAllowException
 import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -85,6 +86,10 @@ class RegisterUserOrSyncUsecase(
     }
 
     private fun register(input: Input): Output {
+        if (input.type != GithubAttributes.USER_TYPE) {
+            throw UserGithubAccountTypeNotAllowException()
+        }
+
         val socialSize = SocialSize.of(input.followers, input.following)
         val userCreateDto =
             UserCreateDto.of(
