@@ -8,4 +8,5 @@ object GithubAttributes {
     const val FOLLOWERS = "followers"
     const val FOLLOWING = "following"
     const val USER_TYPE = "User"
+    const val GITHUB = "github"
 }
