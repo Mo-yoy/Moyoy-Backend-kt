@@ -40,13 +40,17 @@ class JwtConfig(
         return MACVerifier(jwtSecret)
     }
 
+    /**
+     *  Key Rolling 대비 keyId Header에 삽입
+     *  Header의 알고리즘 변경을 이용한 공격방지를 위해 여기서 고정
+     */
     @Bean
     fun octetSequenceKey(): OctetSequenceKey {
         val secretBytes = jwtSecret.encoded
 
         return OctetSequenceKey
             .Builder(Base64URL.encode(secretBytes))
-            .keyID(jwtProperties.keyId) // for key rolling
+            .keyID(jwtProperties.keyId)
             .algorithm(JWSAlgorithm.HS256)
             .build()
     }
