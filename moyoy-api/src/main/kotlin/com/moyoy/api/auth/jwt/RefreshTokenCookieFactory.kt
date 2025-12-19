@@ -8,9 +8,9 @@ import java.time.Duration
 
 @Component
 class RefreshTokenCookieFactory(
-    @Value("\${spring.jwt.refresh-ms}") private val refreshMs: Long,
-    @Value("\${spring.cookie.domain}") private val domain: String,
-    @Value("\${spring.cookie.samesite:Strict}") private val sameSite: String
+    @Value("\${jwt.refresh-expiration-ms}") private val refreshMs: Long,
+    @Value("\${cookie.domain}") private val domain: String,
+    @Value("\${cookie.samesite}") private val sameSite: String
 ) {
     fun createRefreshTokenCookie(refreshToken: String): ResponseCookie {
         val maxAge = Duration.ofMillis(refreshMs).minusMinutes(1)
