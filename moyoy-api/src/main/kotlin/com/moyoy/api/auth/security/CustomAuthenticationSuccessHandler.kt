@@ -7,7 +7,7 @@ import com.moyoy.api.auth.jwt.JwtRefreshWhiteListJDBCRepository
 import com.moyoy.api.auth.jwt.JwtType
 import com.moyoy.api.auth.jwt.JwtUserDto
 import com.moyoy.api.auth.jwt.RefreshTokenCookieFactory
-import com.moyoy.common.utils.HashUtil
+import com.moyoy.common.utils.HashUtils
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.beans.factory.annotation.Value
@@ -35,7 +35,7 @@ class CustomAuthenticationSuccessHandler(
 
         val userId = jwtUserDto.userId
         val expirationTime = jwtPayloadExtractor.extractExpirationTime(refreshToken)
-        val refreshTokenHash = HashUtil.sha256Base64(refreshToken)
+        val refreshTokenHash = HashUtils.sha256Base64(refreshToken)
 
         jwtRefreshTokenRepository.save(
             JwtRefreshWhiteList.of(userId, refreshTokenHash, expirationTime)

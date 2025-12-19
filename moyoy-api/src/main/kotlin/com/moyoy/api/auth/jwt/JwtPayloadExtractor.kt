@@ -27,7 +27,7 @@ class JwtPayloadExtractor {
     }
 
     private fun getClaims(rawToken: String): JWTClaimsSet {
-        val signedJWT = JwtUtils.decode(rawToken)
+        val signedJWT = JwtDecoder.decode(rawToken)
         return try {
             signedJWT.jwtClaimsSet
         } catch (e: ParseException) {
