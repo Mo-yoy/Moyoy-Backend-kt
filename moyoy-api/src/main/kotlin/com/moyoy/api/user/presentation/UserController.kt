@@ -24,7 +24,7 @@ class UserController(
 
     @PostMapping("/auth/reissue/token")
     fun reissueJwt(
-        @CookieValue(REFRESH_TOKEN_COOKIE_NAME) refreshTokenRaw: String
+        @CookieValue(value = REFRESH_TOKEN_COOKIE_NAME, defaultValue = "") refreshTokenRaw: String
     ): ResponseEntity<ApiResponse<JwtReissueResponse>> {
         val input = ReIssueJwtUseCase.Input(refreshTokenRaw)
         val output = reIssueJwtUseCase.execute(input)
