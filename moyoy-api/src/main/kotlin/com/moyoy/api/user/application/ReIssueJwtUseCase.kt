@@ -3,19 +3,18 @@ package com.moyoy.api.user.application
 import com.moyoy.api.auth.jwt.JwtPayloadExtractor
 import com.moyoy.api.auth.jwt.JwtProvider
 import com.moyoy.api.auth.jwt.JwtRefreshWhiteList
-import com.moyoy.api.auth.jwt.JwtRefreshWhiteListJDBCRepository
 import com.moyoy.api.auth.jwt.JwtType
 import com.moyoy.api.auth.jwt.JwtValidator
+import com.moyoy.api.user.application.processor.RefreshTokenRotateProcessor
 import com.moyoy.common.utils.HashUtils
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 @Service
 class ReIssueJwtUseCase(
     private val jwtProvider: JwtProvider,
     private val jwtPayloadExtractor: JwtPayloadExtractor,
     private val jwtValidator: JwtValidator,
-    private val jwtRefreshWhiteListJDBCRepository: JwtRefreshWhiteListJDBCRepository
+    private val refreshTokenRotateProcessor: RefreshTokenRotateProcessor
 ) {
     data class Input(
         val refreshTokenRaw: String
@@ -26,8 +25,6 @@ class ReIssueJwtUseCase(
         val refreshToken: String
     )
 
-    // / TODO 트랜잭션 범위 좁히기
-    @Transactional
     fun execute(input: Input): Output {
         jwtValidator.validate(JwtType.REFRESH, input.refreshTokenRaw)
         val jwtUserDto = jwtPayloadExtractor.extractUserInfo(input.refreshTokenRaw)
@@ -41,9 +38,7 @@ class ReIssueJwtUseCase(
 
         val reissuedRefreshTokenWhiteList = JwtRefreshWhiteList.of(jwtUserDto.userId, newRefreshTokenHash, expirationTime)
 
-        // 실제 트랜잭션이 필요한 곳
-        jwtRefreshWhiteListJDBCRepository.deleteByTokenHash(oldRefreshTokenHash)
-        jwtRefreshWhiteListJDBCRepository.save(reissuedRefreshTokenWhiteList)
+        refreshTokenRotateProcessor.rotate(oldRefreshTokenHash, reissuedRefreshTokenWhiteList)
 
         return Output(
             accessToken = reissuedAccessToken,
