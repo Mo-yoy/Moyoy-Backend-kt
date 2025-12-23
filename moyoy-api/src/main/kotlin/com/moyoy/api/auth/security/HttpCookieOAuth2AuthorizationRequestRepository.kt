@@ -14,7 +14,7 @@ class HttpCookieOAuth2AuthorizationRequestRepository : AuthorizationRequestRepos
     }
 
     override fun loadAuthorizationRequest(request: HttpServletRequest): OAuth2AuthorizationRequest? {
-        return CookieUtils.getCookie(request, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME)?.let { cookie ->
+        return CookieUtils.findCookie(request, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME)?.let { cookie ->
             CookieUtils.deserialize(cookie, OAuth2AuthorizationRequest::class.java)
         }
     }
@@ -25,6 +25,7 @@ class HttpCookieOAuth2AuthorizationRequestRepository : AuthorizationRequestRepos
         response: HttpServletResponse
     ) {
         if (authorizationRequest == null) {
+            // 혹시 브라우저에 남아있을지 모르는 기존 쿠키를 삭제
             CookieUtils.deleteCookie(request, response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME)
             return
         }

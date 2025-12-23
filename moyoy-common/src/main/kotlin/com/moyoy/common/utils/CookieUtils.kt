@@ -12,7 +12,7 @@ import java.io.ObjectOutputStream
 import java.util.Base64
 
 object CookieUtils {
-    fun getCookie(
+    fun findCookie(
         request: HttpServletRequest,
         name: String
     ): Cookie? {
@@ -30,7 +30,7 @@ object CookieUtils {
                 .path("/")
                 .httpOnly(true)
                 .maxAge(1800)
-                .sameSite("None")
+                .sameSite("None") // / TODO 로컬 환경, 테스트 환경 결정 후 환경 변수화 필요
                 .secure(true)
                 .build()
 
