@@ -86,12 +86,9 @@ subprojects {
                             "**/*Response*",
                             "**/*Interceptor*",
                             "**/*Exception*",
-                            "**/com/moyoy/api/auth/security/**",
-                            "**/CookieUtils*",
-                            "**/BaseEntity*",
-                            "**/GitHubAttributes*",
                             "**/*Usecase\$Input*",
-                            "**/*Usecase\$Output*"
+                            "**/*Usecase\$Output*",
+                            "**/common/const/**"
                         )
                     }
                 }
@@ -127,15 +124,11 @@ sonar {
                 "**/*Request*",
                 "**/*Response*",
                 "**/*Exception*",
-                "**/*ErrorCode*",
                 "**/Q*.class",
                 "**/Q*.kt",
-                "**/api/auth/security/**",
-                "**/CookieUtils.kt",
-                "**/BaseEntity.kt",
-                "**/GitHubAttributes.kt",
                 "**/*Usecase\$Input*",
-                "**/*Usecase\$Output*"
+                "**/*Usecase\$Output*",
+                "**/common/const/**"
             ).joinToString(",")
         )
     }
