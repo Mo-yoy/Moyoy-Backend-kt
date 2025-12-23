@@ -64,6 +64,12 @@ subprojects {
 
     tasks.withType<Test> {
         useJUnitPlatform()
+
+        testLogging {
+            events("passed", "skipped", "failed", "standardOut", "standardError")
+            showStandardStreams = true
+            exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        }
         finalizedBy(tasks.named<JacocoReport>("jacocoTestReport"))
     }
 
@@ -81,6 +87,7 @@ subprojects {
                         exclude(
                             "**/*Application*",
                             "**/*Config*",
+                            "**/*Properties*",
                             "**/*Dto*",
                             "**/*Request*",
                             "**/*Response*",
@@ -120,6 +127,7 @@ sonar {
                 "**/resources/**",
                 "**/*Application*",
                 "**/*Config*",
+                "**/*Properties*",
                 "**/*Dto*",
                 "**/*Request*",
                 "**/*Response*",
