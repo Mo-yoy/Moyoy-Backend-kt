@@ -1,7 +1,7 @@
 package com.moyoy.common.utils
 
 import jakarta.servlet.http.Cookie
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.assertThrows
 import org.springframework.http.HttpHeaders
 import org.springframework.mock.web.MockHttpServletRequest
 import org.springframework.mock.web.MockHttpServletResponse
-import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest
 import java.io.NotSerializableException
 import kotlin.test.Test
 
@@ -36,8 +35,8 @@ class CookieUtilsTest {
             val found = CookieUtils.findCookie(request, "my_cookie")
 
             // then
-            assertThat(found).isNotNull
-            assertThat(found?.value).isEqualTo("my_value")
+            Assertions.assertThat(found).isNotNull
+            Assertions.assertThat(found?.value).isEqualTo("my_value")
         }
 
         @Test
@@ -49,7 +48,7 @@ class CookieUtilsTest {
             val found = CookieUtils.findCookie(request, "any_name")
 
             // then
-            assertThat(found).isNull()
+            Assertions.assertThat(found).isNull()
         }
 
         @Test
@@ -62,7 +61,7 @@ class CookieUtilsTest {
             val found = CookieUtils.findCookie(request, "target_cookie")
 
             // then
-            assertThat(found).isNull()
+            Assertions.assertThat(found).isNull()
         }
     }
 
@@ -79,13 +78,13 @@ class CookieUtilsTest {
         // then
         val setCookieHeader = response.getHeader(HttpHeaders.SET_COOKIE)
 
-        assertThat(setCookieHeader).isNotNull
-        assertThat(setCookieHeader).contains("$name=$value")
-        assertThat(setCookieHeader).contains("Path=/")
-        assertThat(setCookieHeader).contains("HttpOnly")
-        assertThat(setCookieHeader).contains("Max-Age=1800")
-        assertThat(setCookieHeader).contains("SameSite=None")
-        assertThat(setCookieHeader).contains("Secure")
+        Assertions.assertThat(setCookieHeader).isNotNull
+        Assertions.assertThat(setCookieHeader).contains("$name=$value")
+        Assertions.assertThat(setCookieHeader).contains("Path=/")
+        Assertions.assertThat(setCookieHeader).contains("HttpOnly")
+        Assertions.assertThat(setCookieHeader).contains("Max-Age=1800")
+        Assertions.assertThat(setCookieHeader).contains("SameSite=None")
+        Assertions.assertThat(setCookieHeader).contains("Secure")
     }
 
     @Nested
@@ -103,9 +102,9 @@ class CookieUtilsTest {
 
             // then
             val deletedCookie = response.getCookie(cookieName)
-            assertThat(deletedCookie).isNotNull
-            assertThat(deletedCookie?.maxAge).isEqualTo(0)
-            assertThat(deletedCookie?.value).isEmpty()
+            Assertions.assertThat(deletedCookie).isNotNull
+            Assertions.assertThat(deletedCookie?.maxAge).isEqualTo(0)
+            Assertions.assertThat(deletedCookie?.value).isEmpty()
         }
 
         @Test
@@ -119,7 +118,7 @@ class CookieUtilsTest {
 
             // then
             val resultCookie = response.getCookie("non_existent")
-            assertThat(resultCookie).isNull()
+            Assertions.assertThat(resultCookie).isNull()
         }
 
         @Test
@@ -130,7 +129,7 @@ class CookieUtilsTest {
             // when & then
             CookieUtils.deleteCookie(request, response, "any_name")
             // No exception occurs
-            assertThat(response.cookies).isEmpty()
+            Assertions.assertThat(response.cookies).isEmpty()
         }
     }
 
@@ -141,20 +140,15 @@ class CookieUtilsTest {
         @DisplayName("직렬화 가능한 객체를 전달하면 Base64 문자열을 반환한다")
         fun should_ReturnBase64String_When_SerializableObject() {
             // given
-            val original =
-                OAuth2AuthorizationRequest
-                    .authorizationCode()
-                    .authorizationUri("https://example.com")
-                    .clientId("client-id")
-                    .build()
+            val original = "test"
 
             // when
             val result = CookieUtils.serialize(original)
 
             // then
-            assertThat(result).isNotEmpty()
-            assertThat(result).isNotBlank()
-            assertThat(result).doesNotContain("+", "/")
+            Assertions.assertThat(result).isNotEmpty()
+            Assertions.assertThat(result).isNotBlank()
+            Assertions.assertThat(result).doesNotContain("+", "/")
         }
 
         @Test
@@ -188,7 +182,7 @@ class CookieUtilsTest {
             val result = CookieUtils.deserialize(cookie, String::class.java)
 
             // then
-            assertThat(result).isEqualTo(original)
+            Assertions.assertThat(result).isEqualTo(original)
         }
 
         @Test
