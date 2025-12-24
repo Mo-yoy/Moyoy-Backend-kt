@@ -24,14 +24,16 @@ class HttpCookieOAuth2AuthorizationRequestRepository : AuthorizationRequestRepos
         request: HttpServletRequest,
         response: HttpServletResponse
     ) {
-        if (authorizationRequest == null) {
+        authorizationRequest?.let { authorizationRequest ->
+            CookieUtils.addCookie(
+                response,
+                OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME,
+                CookieUtils.serialize(authorizationRequest)
+            )
+        } ?: run {
             // 혹시 브라우저에 남아있을지 모르는 기존 쿠키를 삭제
             CookieUtils.deleteCookie(request, response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME)
-            return
         }
-
-        val serializedRequest = CookieUtils.serialize(authorizationRequest)
-        CookieUtils.addCookie(response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME, serializedRequest)
     }
 
     override fun removeAuthorizationRequest(
