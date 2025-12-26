@@ -97,7 +97,10 @@ subprojects {
                             "**/*Usecase\$Output*",
                             "**/common/const/**",
                             "**/CustomOAuth2UserService*",
-                            "**/GithubOAuth2UserPrincipal*"
+                            "**/GithubOAuth2UserPrincipal*",
+                            "**/RdbOAuth2AuthorizedClientService*",
+                            "**/CustomAuthenticationFailureHandler*",
+                            "**/jasypt/**"
                         )
                     }
                 }
@@ -140,7 +143,10 @@ sonar {
                 "**/*Usecase\$Output*",
                 "**/common/const/**",
                 "**/CustomOAuth2UserService*",
-                "**/GithubOAuth2UserPrincipal*"
+                "**/GithubOAuth2UserPrincipal*",
+                "**/RdbOAuth2AuthorizedClientService*",
+                "**/CustomAuthenticationFailureHandler*",
+                "**/jasypt/**"
             ).joinToString(",")
         )
     }
