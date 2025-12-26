@@ -101,6 +101,8 @@ subprojects {
                             "**/RdbOAuth2AuthorizedClientService*",
                             "**/CustomAuthenticationFailureHandler*",
                             "**/CustomAuthenticationSuccessHandler*",
+                            "**/CustomAuthenticationEntryPoint*",
+                            "**/JwtExceptionHandleFilter*",
                             "**/jasypt/**"
                         )
                     }
@@ -148,6 +150,8 @@ sonar {
                 "**/RdbOAuth2AuthorizedClientService*",
                 "**/CustomAuthenticationFailureHandler*",
                 "**/CustomAuthenticationSuccessHandler*",
+                "**/CustomAuthenticationEntryPoint*",
+                "**/JwtExceptionHandleFilter*",
                 "**/jasypt/**"
             ).joinToString(",")
         )

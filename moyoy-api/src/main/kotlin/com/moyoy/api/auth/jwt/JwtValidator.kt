@@ -16,7 +16,6 @@ import java.util.Date
 
 @Component
 class JwtValidator(
-    private val jwtPayloadExtractor: JwtPayloadExtractor,
     private val macVerifier: MACVerifier,
     private val jwtRefreshWhiteListJDBCRepository: JwtRefreshWhiteListJDBCRepository
 ) {
