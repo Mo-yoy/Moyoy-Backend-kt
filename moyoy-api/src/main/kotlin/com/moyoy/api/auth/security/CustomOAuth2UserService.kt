@@ -17,18 +17,15 @@ class CustomOAuth2UserService(
 ) : DefaultOAuth2UserService() {
     override fun loadUser(oAuth2UserRequest: OAuth2UserRequest): OAuth2User {
         val githubUser = fetchGithubUser(oAuth2UserRequest)
-        val output = syncUserAccount(githubUser)
+
+        val input = RegisterOrSyncUserUseCase.Input.from(githubUser)
+        val output = registerOrSyncUserUseCase.execute(input)
 
         return convertToUserPrincipal(output)
     }
 
     private fun fetchGithubUser(oAuth2UserRequest: OAuth2UserRequest): OAuth2User {
         return super.loadUser(oAuth2UserRequest)
-    }
-
-    private fun syncUserAccount(oAuth2User: OAuth2User): RegisterOrSyncUserUseCase.Output {
-        val input = RegisterOrSyncUserUseCase.Input.from(oAuth2User)
-        return registerOrSyncUserUseCase.execute(input)
     }
 
     private fun convertToUserPrincipal(output: RegisterOrSyncUserUseCase.Output): GithubOAuth2UserPrincipal {

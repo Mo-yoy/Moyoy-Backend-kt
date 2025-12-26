@@ -26,6 +26,7 @@ dependencies {
     testImplementation("org.springframework.security:spring-security-test")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testImplementation("com.epages:restdocs-api-spec-mockmvc:0.19.2")
+    testImplementation("com.h2database:h2")
 }
 
 configure<OpenApi3Extension> {

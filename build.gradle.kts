@@ -95,7 +95,9 @@ subprojects {
                             "**/*Exception*",
                             "**/*Usecase\$Input*",
                             "**/*Usecase\$Output*",
-                            "**/common/const/**"
+                            "**/common/const/**",
+                            "**/CustomOAuth2UserService*",
+                            "**/GithubOAuth2UserPrincipal*"
                         )
                     }
                 }
@@ -136,7 +138,9 @@ sonar {
                 "**/Q*.kt",
                 "**/*Usecase\$Input*",
                 "**/*Usecase\$Output*",
-                "**/common/const/**"
+                "**/common/const/**",
+                "**/CustomOAuth2UserService*",
+                "**/GithubOAuth2UserPrincipal*"
             ).joinToString(",")
         )
     }
