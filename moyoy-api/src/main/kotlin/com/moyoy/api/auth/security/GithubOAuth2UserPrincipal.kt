@@ -1,6 +1,6 @@
 package com.moyoy.api.auth.security
 
-import com.moyoy.api.user.application.RegisterUserOrSyncUsecase
+import com.moyoy.api.user.application.RegisterOrSyncUserUseCase
 import com.moyoy.common.const.GithubAttributes
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -25,7 +25,7 @@ class GithubOAuth2UserPrincipal(
         get() = attributes[GithubAttributes.ID] as Long
 
     companion object {
-        fun from(result: RegisterUserOrSyncUsecase.Output): GithubOAuth2UserPrincipal {
+        fun from(result: RegisterOrSyncUserUseCase.Output): GithubOAuth2UserPrincipal {
             val authorities =
                 setOf(
                     SimpleGrantedAuthority(result.role.value)

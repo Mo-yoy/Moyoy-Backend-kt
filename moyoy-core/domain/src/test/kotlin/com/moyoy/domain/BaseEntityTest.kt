@@ -1,5 +1,6 @@
 package com.moyoy.domain
 
+import com.moyoy.domain.user.GithubProfile
 import com.moyoy.domain.user.Role
 import com.moyoy.domain.user.SocialSize
 import com.moyoy.domain.user.User
@@ -28,8 +29,7 @@ class BaseEntityTest
             val user =
                 User(
                     githubUserId = 1,
-                    username = "testUser",
-                    profileImgUrl = "url",
+                    githubProfile = GithubProfile(username = "testUser", profileImgUrl = "url"),
                     socialSize = SocialSize.SMALL,
                     role = Role.USER
                 )
@@ -51,8 +51,7 @@ class BaseEntityTest
                 userRepository.save(
                     User(
                         githubUserId = 2,
-                        username = "oldName",
-                        profileImgUrl = "url",
+                        githubProfile = GithubProfile(username = "oldName", profileImgUrl = "url"),
                         socialSize = SocialSize.SMALL,
                         role = Role.USER
                     )
@@ -62,7 +61,7 @@ class BaseEntityTest
 
             // when
             Thread.sleep(100)
-            user.changeProfile("newName", "newUrl")
+            user.githubProfile = GithubProfile(username = "newName", profileImgUrl = "url")
             userRepository.saveAndFlush(user)
 
             // then

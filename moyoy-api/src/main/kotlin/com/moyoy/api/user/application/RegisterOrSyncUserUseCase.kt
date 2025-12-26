@@ -1,19 +1,20 @@
 package com.moyoy.api.user.application
 
 import com.moyoy.common.const.GithubAttributes
+import com.moyoy.domain.user.GithubProfile
 import com.moyoy.domain.user.Role
 import com.moyoy.domain.user.SocialSize
 import com.moyoy.domain.user.User
+import com.moyoy.domain.user.UserCreate
 import com.moyoy.domain.user.UserRepository
-import com.moyoy.domain.user.dto.UserCreateDto
+import com.moyoy.domain.user.UserSync
 import com.moyoy.domain.user.error.UserGithubAccountTypeNotAllowException
 import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-// / TODO : 로깅
 @Service
-class RegisterUserOrSyncUsecase(
+class RegisterOrSyncUserUseCase(
     private val userRepository: UserRepository
 ) {
     data class Input(
@@ -51,10 +52,10 @@ class RegisterUserOrSyncUsecase(
         companion object {
             fun from(user: User): Output {
                 return Output(
-                    id = requireNotNull(user.id) { "유저 데이터 동기화후 id는 null 일 수 없습니다." },
+                    id = user.id!!,
                     githubUserId = user.githubUserId,
-                    username = user.username,
-                    profileImgUrl = user.profileImgUrl,
+                    username = user.githubProfile.username,
+                    profileImgUrl = user.githubProfile.profileImgUrl,
                     socialSize = user.socialSize,
                     role = user.role
                 )
@@ -64,43 +65,62 @@ class RegisterUserOrSyncUsecase(
 
     @Transactional
     fun execute(input: Input): Output {
-        val user = userRepository.findByGithubUserId(input.githubUserId)
+        isGithubUserAccountType(input.type)
 
-        val resultUser =
-            user ?.let {
-                sync(it, input)
-            } ?: register(input)
+        val socialSize =
+            classifyUserSocialSize(
+                followers = input.followers,
+                following = input.following
+            )
 
-        return resultUser
-    }
-
-    private fun sync(
-        user: User,
-        input: Input
-    ): Output {
-        val socialSize = SocialSize.of(input.followers, input.following)
-        user.changeSocialSize(socialSize)
-        user.changeProfile(input.username, input.profileImgUrl)
+        val user =
+            userRepository
+                .findByGithubUserId(input.githubUserId)
+                ?.apply { syncUser(this, input, socialSize) }
+                ?: registerNewUser(input, socialSize)
 
         return Output.from(user)
     }
 
-    private fun register(input: Input): Output {
-        if (input.type != GithubAttributes.USER_TYPE) {
+    private fun isGithubUserAccountType(type: String) {
+        if (type != GithubAttributes.USER_TYPE) {
             throw UserGithubAccountTypeNotAllowException()
         }
+    }
 
-        val socialSize = SocialSize.of(input.followers, input.following)
-        val userCreateDto =
-            UserCreateDto.of(
-                input.githubUserId,
-                input.username,
-                input.profileImgUrl,
-                socialSize
+    private fun classifyUserSocialSize(
+        followers: Int,
+        following: Int
+    ): SocialSize {
+        return SocialSize.of(
+            followerCount = followers,
+            followingCount = following
+        )
+    }
+
+    private fun syncUser(
+        user: User,
+        input: Input,
+        socialSize: SocialSize
+    ) {
+        val userSync =
+            UserSync(
+                githubProfile = GithubProfile(input.username, input.profileImgUrl),
+                socialSize = socialSize
             )
+        user.syncAccountWithGithub(userSync)
+    }
 
-        val newUser = User.from(userCreateDto)
-        val savedUser = userRepository.save(newUser)
-        return Output.from(savedUser)
+    private fun registerNewUser(
+        input: Input,
+        socialSize: SocialSize
+    ): User {
+        val userCreate =
+            UserCreate(
+                githubUserId = input.githubUserId,
+                githubProfile = GithubProfile(input.username, input.profileImgUrl),
+                socialSize = socialSize
+            )
+        return userRepository.save(User.create(userCreate))
     }
 }

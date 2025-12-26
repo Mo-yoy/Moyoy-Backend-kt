@@ -9,40 +9,32 @@ class UserTest {
         return User(
             id = 1L,
             githubUserId = 12345,
-            username = "oldName",
-            profileImgUrl = "https://old.img",
+            githubProfile = GithubProfile(username = "oldName", profileImgUrl = "https://old.img"),
             socialSize = SocialSize.SMALL,
             role = Role.USER
         )
     }
 
     @Test
-    @DisplayName("changeProfile 호출 시, 프로필(이름, 이미지) 정보가 정상 변경된다.")
-    fun changeProfile() {
+    @DisplayName("syncAccountWithGithub 호출 시, 프로필과 소셜사이즈가 정상적으로 동기화 된다.")
+    fun syncAccountWithGithub() {
         // given
         val user = createTestUser()
         val newUsername = "newName"
         val newImageUrl = "https://new.img"
+        val newSocialSize = SocialSize.LARGE
+
+        val userSync =
+            UserSync(
+                githubProfile = GithubProfile(newUsername, newImageUrl),
+                socialSize = newSocialSize
+            )
 
         // when
-        user.changeProfile(newUsername, newImageUrl)
+        user.syncAccountWithGithub(userSync)
 
         // then
-        assertThat(user.username).isEqualTo(newUsername)
-        assertThat(user.profileImgUrl).isEqualTo(newImageUrl)
-    }
-
-    @Test
-    @DisplayName("chageSocialSize 호출 시, 소셜 사이즈가 정상 변경되어야 한다")
-    fun changeSocialSize() {
-        // given
-        val user = createTestUser()
-        val newSize = SocialSize.LARGE
-
-        // when
-        user.changeSocialSize(newSize)
-
-        // then
-        assertThat(user.socialSize).isEqualTo(newSize)
+        assertThat(user.githubProfile).isEqualTo(GithubProfile(newUsername, newImageUrl))
+        assertThat(user.socialSize).isEqualTo(newSocialSize)
     }
 }

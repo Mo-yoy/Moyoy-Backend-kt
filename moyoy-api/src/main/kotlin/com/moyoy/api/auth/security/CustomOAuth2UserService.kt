@@ -1,6 +1,6 @@
 package com.moyoy.api.auth.security
 
-import com.moyoy.api.user.application.RegisterUserOrSyncUsecase
+import com.moyoy.api.user.application.RegisterOrSyncUserUseCase
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest
 import org.springframework.security.oauth2.core.user.OAuth2User
@@ -13,14 +13,25 @@ import org.springframework.stereotype.Component
 
 @Component
 class CustomOAuth2UserService(
-    private val registerUserOrSyncUsecase: RegisterUserOrSyncUsecase
+    private val registerOrSyncUserUseCase: RegisterOrSyncUserUseCase
 ) : DefaultOAuth2UserService() {
-    override fun loadUser(userRequest: OAuth2UserRequest): OAuth2User {
-        val oAuth2User = super.loadUser(userRequest)
+    override fun loadUser(oAuth2UserRequest: OAuth2UserRequest): OAuth2User {
+        val githubUser = fetchGithubUser(oAuth2UserRequest)
+        val output = syncUserAccount(githubUser)
 
-        val input = RegisterUserOrSyncUsecase.Input.from(oAuth2User)
-        val output = registerUserOrSyncUsecase.execute(input)
+        return convertToUserPrincipal(output)
+    }
 
+    private fun fetchGithubUser(oAuth2UserRequest: OAuth2UserRequest): OAuth2User {
+        return super.loadUser(oAuth2UserRequest)
+    }
+
+    private fun syncUserAccount(oAuth2User: OAuth2User): RegisterOrSyncUserUseCase.Output {
+        val input = RegisterOrSyncUserUseCase.Input.from(oAuth2User)
+        return registerOrSyncUserUseCase.execute(input)
+    }
+
+    private fun convertToUserPrincipal(output: RegisterOrSyncUserUseCase.Output): GithubOAuth2UserPrincipal {
         return GithubOAuth2UserPrincipal.from(output)
     }
 }

@@ -1,8 +1,8 @@
 package com.moyoy.domain.user
 
 import com.moyoy.domain.BaseEntity
-import com.moyoy.domain.user.dto.UserCreateDto
 import jakarta.persistence.Column
+import jakarta.persistence.Embedded
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
@@ -20,10 +20,8 @@ class User(
     val id: Long? = null,
     @Column(nullable = false, unique = true)
     val githubUserId: Int,
-    @Column(nullable = false)
-    var username: String,
-    @Column(nullable = false)
-    var profileImgUrl: String,
+    @Embedded
+    var githubProfile: GithubProfile,
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     var socialSize: SocialSize,
@@ -32,26 +30,26 @@ class User(
     var role: Role
 ) : BaseEntity() {
     companion object {
-        fun from(userCreateDto: UserCreateDto): User {
+        fun create(userCreate: UserCreate): User {
             return User(
-                githubUserId = userCreateDto.githubUserId,
-                username = userCreateDto.username,
-                profileImgUrl = userCreateDto.profileImgUrl,
-                socialSize = userCreateDto.socialSize,
+                githubUserId = userCreate.githubUserId,
+                githubProfile = userCreate.githubProfile,
+                socialSize = userCreate.socialSize,
                 role = Role.USER
             )
         }
     }
 
-    fun changeProfile(
-        username: String,
-        profileImgUrl: String
-    ) {
-        this.username = username
-        this.profileImgUrl = profileImgUrl
+    fun syncAccountWithGithub(userSync: UserSync) {
+        changeGithubProfile(userSync.githubProfile)
+        changeSocialSize(userSync.socialSize)
     }
 
-    fun changeSocialSize(socialSize: SocialSize) {
+    private fun changeGithubProfile(githubProfile: GithubProfile) {
+        this.githubProfile = githubProfile
+    }
+
+    private fun changeSocialSize(socialSize: SocialSize) {
         this.socialSize = socialSize
     }
 }
