@@ -4,6 +4,10 @@ import org.springframework.jdbc.core.JdbcOperations
 import org.springframework.stereotype.Repository
 import java.sql.Timestamp
 
+/**
+ *  TODO : 아직 저장소 고민중, 수정될 부분
+ */
+
 @Repository
 class JwtRefreshWhiteListJDBCRepository(
     private val jdbcOperations: JdbcOperations

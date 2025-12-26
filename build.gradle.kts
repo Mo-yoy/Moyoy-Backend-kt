@@ -100,6 +100,7 @@ subprojects {
                             "**/GithubOAuth2UserPrincipal*",
                             "**/RdbOAuth2AuthorizedClientService*",
                             "**/CustomAuthenticationFailureHandler*",
+                            "**/CustomAuthenticationSuccessHandler*",
                             "**/jasypt/**"
                         )
                     }
@@ -146,6 +147,7 @@ sonar {
                 "**/GithubOAuth2UserPrincipal*",
                 "**/RdbOAuth2AuthorizedClientService*",
                 "**/CustomAuthenticationFailureHandler*",
+                "**/CustomAuthenticationSuccessHandler*",
                 "**/jasypt/**"
             ).joinToString(",")
         )

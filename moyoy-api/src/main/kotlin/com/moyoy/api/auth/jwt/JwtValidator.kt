@@ -45,7 +45,7 @@ class JwtValidator(
     ) {
         validateTokenNotExist(rawToken)
 
-        val signedJWT = JwtDecoder.decode(rawToken)
+        val signedJWT = JwtUtils.decode(rawToken)
         validateTokenSignature(signedJWT)
 
         val claimsSet = signedJWT.jwtClaimsSet

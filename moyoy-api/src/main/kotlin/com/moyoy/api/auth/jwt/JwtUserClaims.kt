@@ -3,15 +3,15 @@ package com.moyoy.api.auth.jwt
 import com.moyoy.api.auth.security.GithubOAuth2UserPrincipal
 import org.springframework.security.core.Authentication
 
-data class JwtUserDto(
+data class JwtUserClaims(
     val userId: Long,
     val authority: String
 ) {
     companion object {
-        fun from(authentication: Authentication): JwtUserDto {
+        fun from(authentication: Authentication): JwtUserClaims {
             val githubUser = authentication.principal as GithubOAuth2UserPrincipal
 
-            return JwtUserDto(
+            return JwtUserClaims(
                 githubUser.id,
                 githubUser.authorities.toString()
             )

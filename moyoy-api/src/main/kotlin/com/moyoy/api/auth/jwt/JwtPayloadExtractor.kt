@@ -11,11 +11,11 @@ import java.time.ZoneId
 
 @Component
 class JwtPayloadExtractor {
-    fun extractUserInfo(rawToken: String): JwtUserDto {
+    fun extractUserClaims(rawToken: String): JwtUserClaims {
         val claims = getClaims(rawToken)
         val userId = claims.getClaim(CLAIM_USER_ID) as Long
         val authority = claims.getClaim(CLAIM_AUTHORITY).toString()
-        return JwtUserDto(userId, authority)
+        return JwtUserClaims(userId, authority)
     }
 
     fun extractExpirationTime(rawToken: String): LocalDateTime {
@@ -27,7 +27,7 @@ class JwtPayloadExtractor {
     }
 
     private fun getClaims(rawToken: String): JWTClaimsSet {
-        val signedJWT = JwtDecoder.decode(rawToken)
+        val signedJWT = JwtUtils.decode(rawToken)
         return try {
             signedJWT.jwtClaimsSet
         } catch (e: ParseException) {

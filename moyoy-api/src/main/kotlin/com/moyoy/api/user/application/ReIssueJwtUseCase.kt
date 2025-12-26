@@ -27,7 +27,7 @@ class ReIssueJwtUseCase(
 
     fun execute(input: Input): Output {
         jwtValidator.validate(JwtType.REFRESH, input.refreshTokenRaw)
-        val jwtUserDto = jwtPayloadExtractor.extractUserInfo(input.refreshTokenRaw)
+        val jwtUserDto = jwtPayloadExtractor.extractUserClaims(input.refreshTokenRaw)
 
         val reissuedRefreshToken = jwtProvider.createJwtToken(jwtUserDto, JwtType.REFRESH)
         val reissuedAccessToken = jwtProvider.createJwtToken(jwtUserDto, JwtType.ACCESS)

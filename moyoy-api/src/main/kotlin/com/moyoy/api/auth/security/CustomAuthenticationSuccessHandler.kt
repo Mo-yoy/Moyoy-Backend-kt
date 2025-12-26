@@ -5,7 +5,7 @@ import com.moyoy.api.auth.jwt.JwtProvider
 import com.moyoy.api.auth.jwt.JwtRefreshWhiteList
 import com.moyoy.api.auth.jwt.JwtRefreshWhiteListJDBCRepository
 import com.moyoy.api.auth.jwt.JwtType
-import com.moyoy.api.auth.jwt.JwtUserDto
+import com.moyoy.api.auth.jwt.JwtUserClaims
 import com.moyoy.api.auth.jwt.RefreshTokenCookieFactory
 import com.moyoy.common.utils.HashUtils
 import jakarta.servlet.http.HttpServletRequest
@@ -29,11 +29,11 @@ class CustomAuthenticationSuccessHandler(
         response: HttpServletResponse,
         authentication: Authentication
     ) {
-        val jwtUserDto = JwtUserDto.from(authentication)
-        val refreshToken = jwtProvider.createJwtToken(jwtUserDto, JwtType.REFRESH)
+        val jwtUserClaims = JwtUserClaims.from(authentication)
+        val refreshToken = jwtProvider.createJwtToken(jwtUserClaims, JwtType.REFRESH)
         response.addHeader(SET_COOKIE, cookieFactory.createRefreshTokenCookie(refreshToken).toString())
 
-        val userId = jwtUserDto.userId
+        val userId = jwtUserClaims.userId
         val expirationTime = jwtPayloadExtractor.extractExpirationTime(refreshToken)
         val refreshTokenHash = HashUtils.sha256Base64(refreshToken)
 

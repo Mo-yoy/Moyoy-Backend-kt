@@ -4,7 +4,7 @@ import com.moyoy.api.auth.error.InvalidJwtException
 import com.nimbusds.jwt.SignedJWT
 import java.text.ParseException
 
-object JwtDecoder {
+object JwtUtils {
     fun decode(rawToken: String): SignedJWT {
         return try {
             SignedJWT.parse(rawToken)

@@ -81,7 +81,7 @@ class JwtAuthenticationFilter(
     private fun authenticate(accessToken: String) {
         jwtValidator.validate(JwtType.ACCESS, accessToken)
 
-        val info = jwtPayloadExtractor.extractUserInfo(accessToken)
+        val info = jwtPayloadExtractor.extractUserClaims(accessToken)
 
         val authorities = setOf(SimpleGrantedAuthority(info.authority))
         val attributes = mapOf<String, Any>(JwtConst.CLAIM_USER_ID to info.userId)

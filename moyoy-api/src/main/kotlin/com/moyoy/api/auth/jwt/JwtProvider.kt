@@ -18,7 +18,7 @@ class JwtProvider(
     private val refreshTokenExpirationMs: Long
 ) {
     fun createJwtToken(
-        jwtUserDto: JwtUserDto,
+        jwtUserClaims: JwtUserClaims,
         tokenType: JwtType
     ): String {
         val header =
@@ -30,9 +30,9 @@ class JwtProvider(
         val payload =
             JWTClaimsSet
                 .Builder()
-                .claim(CLAIM_USER_ID, jwtUserDto.userId)
+                .claim(CLAIM_USER_ID, jwtUserClaims.userId)
                 .claim(CLAIM_TOKEN_TYPE, tokenType.value)
-                .claim(CLAIM_AUTHORITY, jwtUserDto.authority)
+                .claim(CLAIM_AUTHORITY, jwtUserClaims.authority)
                 .expirationTime(getTokenExpiration(tokenType))
                 .build()
 
