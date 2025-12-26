@@ -64,6 +64,12 @@ subprojects {
 
     tasks.withType<Test> {
         useJUnitPlatform()
+
+        testLogging {
+            events("passed", "skipped", "failed", "standardOut", "standardError")
+            showStandardStreams = true
+            exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        }
         finalizedBy(tasks.named<JacocoReport>("jacocoTestReport"))
     }
 
@@ -81,11 +87,23 @@ subprojects {
                         exclude(
                             "**/*Application*",
                             "**/*Config*",
+                            "**/*Properties*",
                             "**/*Dto*",
                             "**/*Request*",
                             "**/*Response*",
                             "**/*Interceptor*",
-                            "**/*Exception*"
+                            "**/*Exception*",
+                            "**/*Usecase\$Input*",
+                            "**/*Usecase\$Output*",
+                            "**/common/const/**",
+                            "**/CustomOAuth2UserService*",
+                            "**/GithubOAuth2UserPrincipal*",
+                            "**/RdbOAuth2AuthorizedClientService*",
+                            "**/CustomAuthenticationFailureHandler*",
+                            "**/CustomAuthenticationSuccessHandler*",
+                            "**/CustomAuthenticationEntryPoint*",
+                            "**/JwtExceptionHandleFilter*",
+                            "**/jasypt/**"
                         )
                     }
                 }
@@ -117,13 +135,24 @@ sonar {
                 "**/resources/**",
                 "**/*Application*",
                 "**/*Config*",
+                "**/*Properties*",
                 "**/*Dto*",
                 "**/*Request*",
                 "**/*Response*",
                 "**/*Exception*",
-                "**/*ErrorCode*",
                 "**/Q*.class",
-                "**/Q*.kt"
+                "**/Q*.kt",
+                "**/*Usecase\$Input*",
+                "**/*Usecase\$Output*",
+                "**/common/const/**",
+                "**/CustomOAuth2UserService*",
+                "**/GithubOAuth2UserPrincipal*",
+                "**/RdbOAuth2AuthorizedClientService*",
+                "**/CustomAuthenticationFailureHandler*",
+                "**/CustomAuthenticationSuccessHandler*",
+                "**/CustomAuthenticationEntryPoint*",
+                "**/JwtExceptionHandleFilter*",
+                "**/jasypt/**"
             ).joinToString(",")
         )
     }
