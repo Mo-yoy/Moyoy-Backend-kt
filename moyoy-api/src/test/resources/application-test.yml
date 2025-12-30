@@ -1,0 +1,46 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+  flyway:
+    enabled: false
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: test-client-id
+            client-secret: test-client-secret
+            redirect-uri: http://localhost:8080/login/oauth2/code/github
+            scope: read:user
+  cors:
+    allow-origin: http://localhost:5173
+
+jwt:
+  secret: test-secret-key-for-integration-testing-must-be-long-enough-to-avoid-weak-key-exception
+  key-id: test-key-id
+  access-expiration-ms: 3600000
+  refresh-expiration-ms: 86400000
+
+login:
+  default-uri: http://localhost:5173/menu
+
+cookie:
+  samesite: Strict
+  domain: localhost
+
+jasypt:
+  encryptor:
+    password: test-password
+    algorithm: PBEWithMD5AndDES
+    pool-size: 1

@@ -2,3 +2,29 @@ spring:
   config:
     import:
       - infra.yml
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${CLIENT_ID}
+            client-secret: ${CLIENT_SECRET}
+            redirect-uri: ${REDIRECT_URI}
+            scope: ${SCOPE}
+
+  cors:
+    allow-origin: ${ALLOW_ORIGIN:http://localhost:5173}
+
+jwt:
+  secret: ${JWT_SECRET}
+  key-id: ${JWT_KEY_ID}
+  access-expiration-ms: ${JWT_ACCESS_MS}
+  refresh-expiration-ms: ${JWT_REFRESH_MS}
+
+login:
+  default-uri: ${DEFAULT_URI:http://localhost:5173/menu}
+
+cookie:
+  samesite: ${COOKIE_SAME_SITE:Strict}
+  domain: ${COOKIE_DOMAIN:localhost}
