@@ -1,5 +1,6 @@
 package com.moyoy.domain.user
 
+import com.moyoy.domain.user.dto.UserSync
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test

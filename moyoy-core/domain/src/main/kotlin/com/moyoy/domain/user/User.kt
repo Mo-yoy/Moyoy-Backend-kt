@@ -1,6 +1,8 @@
 package com.moyoy.domain.user
 
 import com.moyoy.domain.BaseEntity
+import com.moyoy.domain.user.dto.UserCreate
+import com.moyoy.domain.user.dto.UserSync
 import jakarta.persistence.Column
 import jakarta.persistence.Embedded
 import jakarta.persistence.Entity

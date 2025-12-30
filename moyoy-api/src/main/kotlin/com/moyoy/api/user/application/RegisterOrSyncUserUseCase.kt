@@ -5,9 +5,9 @@ import com.moyoy.domain.user.GithubProfile
 import com.moyoy.domain.user.Role
 import com.moyoy.domain.user.SocialSize
 import com.moyoy.domain.user.User
-import com.moyoy.domain.user.UserCreate
 import com.moyoy.domain.user.UserRepository
-import com.moyoy.domain.user.UserSync
+import com.moyoy.domain.user.dto.UserCreate
+import com.moyoy.domain.user.dto.UserSync
 import com.moyoy.domain.user.error.UserGithubAccountTypeNotAllowException
 import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.stereotype.Service

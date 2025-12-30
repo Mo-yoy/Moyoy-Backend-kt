@@ -4,8 +4,8 @@ import com.moyoy.common.const.GithubAttributes
 import com.moyoy.domain.user.GithubProfile
 import com.moyoy.domain.user.SocialSize
 import com.moyoy.domain.user.User
-import com.moyoy.domain.user.UserCreate
 import com.moyoy.domain.user.UserRepository
+import com.moyoy.domain.user.dto.UserCreate
 import com.moyoy.domain.user.error.UserGithubAccountTypeNotAllowException
 import jakarta.persistence.EntityManager
 import org.assertj.core.api.Assertions.assertThat

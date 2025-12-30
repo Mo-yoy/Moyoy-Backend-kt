@@ -1,4 +1,7 @@
-package com.moyoy.domain.user
+package com.moyoy.domain.user.dto
+
+import com.moyoy.domain.user.GithubProfile
+import com.moyoy.domain.user.SocialSize
 
 data class UserCreate(
     val githubUserId: Int,
