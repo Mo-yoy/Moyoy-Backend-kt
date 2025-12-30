@@ -3,7 +3,7 @@ package com.moyoy.api.auth.jwt.filter
 import com.moyoy.api.auth.error.InvalidJwtException
 import com.moyoy.api.auth.jwt.JwtProvider
 import com.moyoy.api.auth.jwt.JwtType
-import com.moyoy.api.auth.jwt.JwtUserClaims
+import com.moyoy.api.auth.jwt.dto.JwtUserClaims
 import com.moyoy.api.auth.security.GithubOAuth2UserPrincipal
 import com.moyoy.common.const.JwtConst
 import jakarta.servlet.FilterChain

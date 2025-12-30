@@ -1,5 +1,6 @@
 package com.moyoy.api.auth.jwt
 
+import com.moyoy.api.auth.jwt.dto.JwtUserClaims
 import com.moyoy.common.const.JwtConst.CLAIM_AUTHORITY
 import com.moyoy.common.const.JwtConst.CLAIM_TOKEN_TYPE
 import com.moyoy.common.const.JwtConst.CLAIM_USER_ID

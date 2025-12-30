@@ -5,6 +5,7 @@ import com.moyoy.api.auth.error.ExpiredJwtException
 import com.moyoy.api.auth.error.InvalidJwtException
 import com.moyoy.api.auth.error.JwtNotExistException
 import com.moyoy.api.auth.error.JwtTypeMismatchException
+import com.moyoy.api.auth.jwt.dto.JwtUserClaims
 import com.moyoy.common.const.JwtConst
 import com.moyoy.common.utils.HashUtils
 import com.nimbusds.jose.JWSAlgorithm

@@ -95,7 +95,7 @@ subprojects {
                             "**/*Exception*",
                             "**/*Usecase\$Input*",
                             "**/*Usecase\$Output*",
-                            "**/common/error/*",
+                            "**/error/*",
                             "**/common/const/**",
                             "**/dto/**",
                             "**/CustomOAuth2UserService*",
@@ -104,6 +104,7 @@ subprojects {
                             "**/CustomAuthenticationFailureHandler*",
                             "**/CustomAuthenticationSuccessHandler*",
                             "**/CustomAuthenticationEntryPoint*",
+                            "**/CustomAccessDeniedHandler*",
                             "**/JwtExceptionHandleFilter*",
                             "**/JwtRefreshWhiteListJDBCRepository*", // 임시 저장소 (변경 예정)
                             "**/jasypt/**"
@@ -147,7 +148,7 @@ sonar {
                 "**/Q*.kt",
                 "**/*Usecase\$Input*",
                 "**/*Usecase\$Output*",
-                "**/common/error/**",
+                "**/error/**",
                 "**/common/const/**",
                 "**/dto/**",
                 "**/CustomOAuth2UserService*",
@@ -156,6 +157,7 @@ sonar {
                 "**/CustomAuthenticationFailureHandler*",
                 "**/CustomAuthenticationSuccessHandler*",
                 "**/CustomAuthenticationEntryPoint*",
+                "**/CustomAccessDeniedHandler*",
                 "**/JwtExceptionHandleFilter*",
                 "**/JwtRefreshWhiteListJDBCRepository*", // 임시 저장소 (변경 예정)
                 "**/jasypt/**"

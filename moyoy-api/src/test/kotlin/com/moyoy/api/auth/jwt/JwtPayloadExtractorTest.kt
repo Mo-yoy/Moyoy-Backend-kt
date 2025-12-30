@@ -1,5 +1,6 @@
 package com.moyoy.api.auth.jwt
 
+import com.moyoy.api.auth.jwt.dto.JwtUserClaims
 import com.nimbusds.jose.JWSAlgorithm
 import com.nimbusds.jose.crypto.MACSigner
 import com.nimbusds.jose.jwk.OctetSequenceKey

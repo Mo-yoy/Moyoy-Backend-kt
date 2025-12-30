@@ -1,4 +1,4 @@
-package com.moyoy.api.auth.jwt
+package com.moyoy.api.auth.jwt.dto
 
 import com.moyoy.api.auth.security.GithubOAuth2UserPrincipal
 import org.springframework.security.core.Authentication

@@ -5,8 +5,8 @@ import com.moyoy.api.auth.jwt.JwtProvider
 import com.moyoy.api.auth.jwt.JwtRefreshWhiteList
 import com.moyoy.api.auth.jwt.JwtRefreshWhiteListJDBCRepository
 import com.moyoy.api.auth.jwt.JwtType
-import com.moyoy.api.auth.jwt.JwtUserClaims
 import com.moyoy.api.auth.jwt.RefreshTokenCookieFactory
+import com.moyoy.api.auth.jwt.dto.JwtUserClaims
 import com.moyoy.common.utils.HashUtils
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
