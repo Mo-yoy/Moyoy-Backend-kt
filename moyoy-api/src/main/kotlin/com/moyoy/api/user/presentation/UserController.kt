@@ -19,7 +19,7 @@ class UserController(
     private val reIssueJwtUseCase: ReIssueJwtUseCase
 ) {
     companion object {
-        private const val REFRESH_TOKEN_COOKIE_NAME = "refresh"
+        const val REFRESH_TOKEN_COOKIE_NAME = "refresh"
     }
 
     @PostMapping("/auth/reissue/token")
