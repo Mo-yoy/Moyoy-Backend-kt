@@ -103,6 +103,7 @@ subprojects {
                             "**/CustomAuthenticationSuccessHandler*",
                             "**/CustomAuthenticationEntryPoint*",
                             "**/JwtExceptionHandleFilter*",
+                            "**/JwtRefreshWhiteListJDBCRepository*", // 임시 저장소 (변경 예정)
                             "**/jasypt/**"
                         )
                     }
@@ -152,6 +153,7 @@ sonar {
                 "**/CustomAuthenticationSuccessHandler*",
                 "**/CustomAuthenticationEntryPoint*",
                 "**/JwtExceptionHandleFilter*",
+                "**/JwtRefreshWhiteListJDBCRepository*", // 임시 저장소 (변경 예정)
                 "**/jasypt/**"
             ).joinToString(",")
         )

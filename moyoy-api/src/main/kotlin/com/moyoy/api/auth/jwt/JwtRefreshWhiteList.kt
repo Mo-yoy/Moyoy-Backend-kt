@@ -12,18 +12,4 @@ data class JwtRefreshWhiteList(
     val userId: Long,
     val tokenHash: String,
     val expiresAt: LocalDateTime
-) {
-    companion object {
-        fun of(
-            userId: Long,
-            tokenHash: String,
-            expiresAt: LocalDateTime
-        ): JwtRefreshWhiteList {
-            return JwtRefreshWhiteList(
-                userId = userId,
-                tokenHash = tokenHash,
-                expiresAt = expiresAt
-            )
-        }
-    }
-}
+)

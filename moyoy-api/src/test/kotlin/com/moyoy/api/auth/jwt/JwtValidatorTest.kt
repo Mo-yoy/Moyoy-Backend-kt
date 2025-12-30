@@ -122,7 +122,13 @@ class JwtValidatorTest {
         val tokenHash = HashUtils.sha256Base64(token)
         val expirationTime = jwtPayloadExtractor.extractExpirationTime(token)
 
-        repository.save(JwtRefreshWhiteList.of(userId, tokenHash, expirationTime))
+        repository.save(
+            JwtRefreshWhiteList(
+                userId = userId,
+                tokenHash = tokenHash,
+                expiresAt = expirationTime
+            )
+        )
 
         // when & then
         assertDoesNotThrow {

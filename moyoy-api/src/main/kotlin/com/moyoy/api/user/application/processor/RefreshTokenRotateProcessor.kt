@@ -7,14 +7,14 @@ import org.springframework.transaction.annotation.Transactional
 
 @Component
 class RefreshTokenRotateProcessor(
-    private val jwtRefreshWhiteListJDBCRepository: JwtRefreshWhiteListJDBCRepository
+    private val jwtRefreshWhiteListRepository: JwtRefreshWhiteListJDBCRepository
 ) {
     @Transactional
     fun rotate(
         oldTokenHash: String,
         newTokenEntity: JwtRefreshWhiteList
     ) {
-        jwtRefreshWhiteListJDBCRepository.deleteByTokenHash(oldTokenHash)
-        jwtRefreshWhiteListJDBCRepository.save(newTokenEntity)
+        jwtRefreshWhiteListRepository.deleteByTokenHash(oldTokenHash)
+        jwtRefreshWhiteListRepository.save(newTokenEntity)
     }
 }

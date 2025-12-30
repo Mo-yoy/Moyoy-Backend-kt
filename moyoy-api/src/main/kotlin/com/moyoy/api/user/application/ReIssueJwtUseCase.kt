@@ -36,7 +36,12 @@ class ReIssueJwtUseCase(
         val newRefreshTokenHash = HashUtils.sha256Base64(reissuedRefreshToken)
         val expirationTime = jwtPayloadExtractor.extractExpirationTime(reissuedRefreshToken)
 
-        val reissuedRefreshTokenWhiteList = JwtRefreshWhiteList.of(jwtUserDto.userId, newRefreshTokenHash, expirationTime)
+        val reissuedRefreshTokenWhiteList =
+            JwtRefreshWhiteList(
+                userId = jwtUserDto.userId,
+                tokenHash = newRefreshTokenHash,
+                expiresAt = expirationTime
+            )
 
         refreshTokenRotateProcessor.rotate(oldRefreshTokenHash, reissuedRefreshTokenWhiteList)
 

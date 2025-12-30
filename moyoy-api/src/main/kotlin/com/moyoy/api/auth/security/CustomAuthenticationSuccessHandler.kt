@@ -38,7 +38,11 @@ class CustomAuthenticationSuccessHandler(
         val refreshTokenHash = HashUtils.sha256Base64(refreshToken)
 
         jwtRefreshTokenRepository.save(
-            JwtRefreshWhiteList.of(userId, refreshTokenHash, expirationTime)
+            JwtRefreshWhiteList(
+                userId = userId,
+                tokenHash = refreshTokenHash,
+                expiresAt = expirationTime
+            )
         )
 
         /**
