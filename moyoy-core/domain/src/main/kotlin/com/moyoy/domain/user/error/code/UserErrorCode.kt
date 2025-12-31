@@ -1,4 +1,4 @@
-package com.moyoy.domain.user.error
+package com.moyoy.domain.user.error.code
 
 import com.moyoy.common.error.BaseErrorCode
 import com.moyoy.common.error.ErrorReason
