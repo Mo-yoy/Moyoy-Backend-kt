@@ -18,8 +18,8 @@ class GithubFeignConfig : MoyoyConfig {
         }
     }
 
-//    @Bean
-//    fun githubErrorDecoder(): GithubErrorDecoder {
-//        return GithubErrorDecoder()
-//    }
+    @Bean
+    fun githubErrorDecoder(): GithubErrorDecoder {
+        return GithubErrorDecoder()
+    }
 }
