@@ -1,9 +1,7 @@
-package com.moyoy.infra.github
+package com.moyoy.infra.feign.github
 
 import org.springframework.http.ResponseEntity
-import org.springframework.stereotype.Component
 
-@Component
 class GithubPaginationApiTemplate {
     companion object {
         private const val RATE_LIMIT_REMAINING_HEADER = "X-RateLimit-Remaining"

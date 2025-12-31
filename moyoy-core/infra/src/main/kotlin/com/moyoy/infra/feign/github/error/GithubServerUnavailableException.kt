@@ -1,7 +1,7 @@
-package com.moyoy.infra.github.error
+package com.moyoy.infra.feign.github.error
 
 import com.moyoy.common.error.MoyoyException
-import com.moyoy.infra.github.error.code.GithubErrorCode.GITHUB_SERVER_UNAVAILABLE
+import com.moyoy.infra.feign.github.error.code.GithubErrorCode.GITHUB_SERVER_UNAVAILABLE
 
 class GithubServerUnavailableException :
     MoyoyException(

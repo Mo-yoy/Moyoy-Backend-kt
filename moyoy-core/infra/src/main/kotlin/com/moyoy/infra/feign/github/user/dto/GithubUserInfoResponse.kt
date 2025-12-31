@@ -1,4 +1,4 @@
-package com.moyoy.infra.github.user.dto
+package com.moyoy.infra.feign.github.user.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

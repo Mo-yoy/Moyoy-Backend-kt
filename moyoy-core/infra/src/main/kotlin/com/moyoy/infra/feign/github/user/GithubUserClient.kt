@@ -1,10 +1,8 @@
-package com.moyoy.infra.github.user
+package com.moyoy.infra.feign.github.user
 
-import com.moyoy.infra.github.user.dto.GithubUserInfoResponse
-import org.springframework.stereotype.Component
+import com.moyoy.infra.feign.github.user.dto.GithubUserInfoResponse
 
-@Component
-class GithubUserClient private constructor(
+class GithubUserClient(
     private val githubUserApi: GithubUserApi
 ) {
     fun fetchUserInfo(

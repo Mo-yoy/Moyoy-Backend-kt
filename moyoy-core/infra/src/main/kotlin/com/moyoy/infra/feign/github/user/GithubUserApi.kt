@@ -1,7 +1,7 @@
-package com.moyoy.infra.github.user
+package com.moyoy.infra.feign.github.user
 
-import com.moyoy.infra.github.GithubFeignConfig
-import com.moyoy.infra.github.user.dto.GithubUserInfoResponse
+import com.moyoy.infra.feign.github.GithubFeignConfig
+import com.moyoy.infra.feign.github.user.dto.GithubUserInfoResponse
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestHeader
     url = "https://api.github.com",
     configuration = [GithubFeignConfig::class]
 )
-internal interface GithubUserApi {
+interface GithubUserApi {
     /**
      * [Get a user using their ID](https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#get-a-user-using-their-id)
      *

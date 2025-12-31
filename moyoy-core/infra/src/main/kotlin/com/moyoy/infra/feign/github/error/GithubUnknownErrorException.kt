@@ -1,4 +1,4 @@
-package com.moyoy.infra.github.error
+package com.moyoy.infra.feign.github.error
 
 import com.moyoy.common.error.BaseErrorCode
 import com.moyoy.common.error.ErrorReason

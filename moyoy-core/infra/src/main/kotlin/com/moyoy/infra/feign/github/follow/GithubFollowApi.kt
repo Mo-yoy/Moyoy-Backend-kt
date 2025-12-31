@@ -1,7 +1,7 @@
-package com.moyoy.infra.github.follow
+package com.moyoy.infra.feign.github.follow
 
-import com.moyoy.infra.github.GithubFeignConfig
-import com.moyoy.infra.github.follow.dto.GithubFollowUserInfoResponse
+import com.moyoy.infra.feign.github.GithubFeignConfig
+import com.moyoy.infra.feign.github.follow.dto.GithubFollowUserInfoResponse
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.http.HttpHeaders.AUTHORIZATION
 import org.springframework.http.ResponseEntity
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam
     url = "https://api.github.com",
     configuration = [GithubFeignConfig::class]
 )
-internal interface GithubFollowApi {
+interface GithubFollowApi {
     /**
      * [List followers of the authenticated user](https://docs.github.com/en/rest/users/followers?apiVersion=2022-11-28#list-followers-of-the-authenticated-user)
      *

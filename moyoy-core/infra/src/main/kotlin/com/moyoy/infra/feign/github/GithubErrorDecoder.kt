@@ -1,12 +1,12 @@
-package com.moyoy.infra.github
+package com.moyoy.infra.feign.github
 
-import com.moyoy.infra.github.error.GithubClientErrorException
-import com.moyoy.infra.github.error.GithubForbiddenException
-import com.moyoy.infra.github.error.GithubResourceNotFoundException
-import com.moyoy.infra.github.error.GithubServerErrorException
-import com.moyoy.infra.github.error.GithubUnauthorizedException
-import com.moyoy.infra.github.error.GithubUnknownErrorException
-import com.moyoy.infra.github.error.GithubValidationFailedException
+import com.moyoy.infra.feign.github.error.GithubClientErrorException
+import com.moyoy.infra.feign.github.error.GithubForbiddenException
+import com.moyoy.infra.feign.github.error.GithubResourceNotFoundException
+import com.moyoy.infra.feign.github.error.GithubServerErrorException
+import com.moyoy.infra.feign.github.error.GithubUnauthorizedException
+import com.moyoy.infra.feign.github.error.GithubUnknownErrorException
+import com.moyoy.infra.feign.github.error.GithubValidationFailedException
 import feign.Response
 import feign.codec.ErrorDecoder
 

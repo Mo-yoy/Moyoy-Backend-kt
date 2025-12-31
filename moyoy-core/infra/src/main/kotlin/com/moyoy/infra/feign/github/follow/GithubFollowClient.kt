@@ -1,14 +1,12 @@
-package com.moyoy.infra.github.follow
+package com.moyoy.infra.feign.github.follow
 
 import com.moyoy.common.const.GithubAttributes.USER_TYPE
 import com.moyoy.domain.follow.GithubFollowUserProfile
-import com.moyoy.infra.github.GithubPaginationApiTemplate
-import com.moyoy.infra.github.follow.dto.GithubFollowUserInfoResponse
-import com.moyoy.infra.github.user.GithubUserApi
-import org.springframework.stereotype.Component
+import com.moyoy.infra.feign.github.GithubPaginationApiTemplate
+import com.moyoy.infra.feign.github.follow.dto.GithubFollowUserInfoResponse
+import com.moyoy.infra.feign.github.user.GithubUserApi
 
-@Component
-class GithubFollowClient private constructor(
+class GithubFollowClient(
     private val githubFollowApi: GithubFollowApi,
     private val githubUserApi: GithubUserApi,
     private val paginationApiTemplate: GithubPaginationApiTemplate
